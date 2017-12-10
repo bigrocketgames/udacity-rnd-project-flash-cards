@@ -1,13 +1,13 @@
 import React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
 const DeckHomeCard = ({deck}) => {
   return(
     <View style={styles.deckContainer}>
-      <TouchableOpacity style={{alignItems: 'center', margin: 10, padding: 20}}>
+      <View style={{alignItems: 'center', margin: 10, padding: 20}}>
         <Text style={{fontSize: 30}}>{deck.title}</Text>
         <Text style={{fontSize: 18}}>{deck.questions.length} questions</Text>
-      </TouchableOpacity>
+      </View>
     </View>
   )
 }
