@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
 
 import DeckHomeCard from './DeckHomeCard'
 import { getDecks } from '../utils/api'
@@ -49,7 +49,18 @@ class Decks extends Component {
     return (
       <View>
         <Text style={{fontSize: 40, marginTop: 10, alignSelf: 'center'}}>Choose a Deck</Text>
-        { decks ? decks.map((deck) => <DeckHomeCard key={deck.title} deck={deck} />) : 'I am rendering the decks component, but there are no decks to render.'}
+        { decks ? 
+          <FlatList 
+            data={decks}
+            renderItem={({deck}) => <TouchableOpacity key={deck.title} onPress={() => this.props.navigation.navigate(
+              'DeckDetail',
+              { deck: deck }
+            )}>
+              <DeckHomeCard deck={deck} />
+            </TouchableOpacity>}
+          /> 
+          : 
+          'Please add your first deck of cards to begin.'}
       </View> 
     )
   }
