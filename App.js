@@ -24,14 +24,14 @@ const Tabs = TabNavigator({
     screen: Decks,
     navigationOptions: {
       tabBarLabel: 'Home',
-      tabBarIcon: <Ionicons name='ios-home-outline' size={30} color={'#fff'} />
+      tabBarIcon: <Ionicons name='ios-home' size={30} color={'#fff'} />
     }
   },
   AddDeck: {
     screen: AddDeck,
     navigationOptions: {
       tabBarLabel: 'Add Deck',
-      tabBarIcon: <FontAwesome name='plus-square' size={30} color={'#fff'} />
+      tabBarIcon: <FontAwesome name='plus' size={30} color={'#fff'} />
     }
   }
 }, {
@@ -40,6 +40,7 @@ const Tabs = TabNavigator({
   },
   tabBarOptions: {
     activeTintColor: '#fff',
+    inactiveTintColor: '#000',
     style: {
       height: 50,
       backgroundColor: red,
