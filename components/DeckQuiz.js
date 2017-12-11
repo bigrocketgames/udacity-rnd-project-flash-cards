@@ -20,3 +20,5 @@ class DeckQuiz extends Component {
     )
   }
 }
+
+export default DeckQuiz
