@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, TextInput, KeyboardAvoidingView, StyleSheet } from 'react-native'
+import { View, Text, TextInput, KeyboardAvoidingView, StyleSheet, TouchableHighlight } from 'react-native'
+
+import { saveDeckTitle } from '../utils/api'
 
 class AddDeck extends Component {
   state = {
@@ -12,6 +14,11 @@ class AddDeck extends Component {
     }))
   }
 
+  handleSubmit = (deckTitle) => {
+    const newDeck = { title: deckTitle, questions: []}
+    saveDeckTitle(newDeck)
+  }
+
   render() {
     const { deckTitle } = this.state
 
@@ -22,6 +29,9 @@ class AddDeck extends Component {
           <Text>Deck Name:</Text>
           <TextInput style={styles.inputBox} value={deckTitle} onChangeText={this.handleChange} />
         </View>
+        <TouchableHighlight onPress={() => this.handleSubmit(deckTitle)}>
+          <Text>Submit</Text>
+        </TouchableHighlight>
       </KeyboardAvoidingView>
     )
   }

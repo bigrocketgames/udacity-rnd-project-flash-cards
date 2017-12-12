@@ -6,48 +6,57 @@ import { getDecks } from '../utils/api'
 
 class Decks extends Component {
   state = {
-    decks: [
-      {
-        title: 'javascript',
-        questions: [
-          {
-            question: 'is javascript fun',
-            answer: 'yes'
-          },
-          {
-            question: 'is it easy',
-            answer: 'no'
-          }
-        ]
-      },
-      {
-        title: 'react',
-        questions: [
-          {
-            question: 'is react fun',
-            answer: 'yes'
-          },
-          {
-            question: 'is it easy',
-            answer: 'no'
-          }
-        ]
-      }
-    ]
+    decks: []
   }
 
-  // componentDidMount() {
-  //   getDecks()
-  //     .then((decks) => {this.setState(() => ({ decks }))})
-  // }
+  // decks: [
+  //   {
+  //     title: 'javascript',
+  //     questions: [
+  //       {
+  //         question: 'is javascript fun',
+  //         answer: 'yes'
+  //       },
+  //       {
+  //         question: 'is it easy',
+  //         answer: 'no'
+  //       }
+  //     ]
+  //   },
+  //   {
+  //     title: 'react',
+  //     questions: [
+  //       {
+  //         question: 'is react fun',
+  //         answer: 'yes'
+  //       },
+  //       {
+  //         question: 'is it easy',
+  //         answer: 'no'
+  //       }
+  //     ]
+  //   }
+  // ]
+
+  componentDidMount() {
+    getDecks()
+      .then((decks) => {
+        if (decks !== undefined) {
+          this.setState(() => ({ decks }))
+        } else {
+          console.log("decks are undefined")
+        }
+      })
+  }
 
   render() {
     const { decks } = this.state
+    console.log(decks, 'decks component')
 
     return (
       <View>
         <Text style={{fontSize: 40, marginTop: 10, alignSelf: 'center'}}>Choose a Deck</Text>
-        { decks ? 
+        { decks.length > 0  ? 
           <FlatList 
             style={styles.list}
             data={decks}
@@ -60,7 +69,7 @@ class Decks extends Component {
             keyExtractor={(deck) => deck.title}
           /> 
           : 
-          'Please add your first deck of cards to begin.'}
+          <Text>Please add your first deck of cards to begin.</Text>}
       </View> 
     )
   }
