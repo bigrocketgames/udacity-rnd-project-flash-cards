@@ -1,13 +1,11 @@
 import { AsyncStorage } from 'react-native'
 
-const DECKS_STORAGE_KEY = 'decks_storage'
+const DECKS_STORAGE_KEY = 'decks_storage:key'
 
-export const getDecks = () => {
+export async function getDecks() {
   try{
-   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
-      .then((results) => {
-        const decks = JSON.parse(results)
-      })
+   return await AsyncStorage.getItem(DECKS_STORAGE_KEY)
+      .then((results) => JSON.parse(results))
   } catch (error) {
     console.log(error)
   }
@@ -16,22 +14,40 @@ export const getDecks = () => {
 
 export const getDeck = ({deckId}) => {
   try {
-    return deck = AsyncStorage.getItem(DECKS_STORAGE_KEY[deckId])
+    return deck = AsyncStorage.getItem(DECKS_STORAGE_KEY)
+      // using .then to get the requested deckId
   } catch (error) {
     console.log(error)
   }
   
 }
-
-export const saveDeckTitle = (newDeck) => {
+export async function saveDeckTitle(key, newDeck){
   let decks = ''
-  AsyncStorage.getItem(DECKS_STORAGE_KEY)
-    .then((results) => {
-      decks = JSON.parse(results)
-    })
+  
+  try {
+    await AsyncStorage.getItem(DECKS_STORAGE_KEY)
+      .then((results) => {
+        decks = JSON.parse(results)
+      })
+  } catch (error) {
+    console.log(error)
+  }
 
-  console.log(decks.length)
-  // if decks.length > 0 ? add newDeck : setItem as array with newDeck
+  // decks.length > 0 ? add newDeck to db : setItem newDeck as only object in decks array 
+  if (decks !== null) {
+    try {
+      return await AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({[key]: newDeck}))
+    } catch (error) {
+      console.log(error)
+    }
+  } else {
+    try {
+      return await AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify({[key]: newDeck}))
+        .then((results) => console.log(JSON.parse(results)))
+    } catch(error) {
+      console.log(error)
+    }
+  }
 }
 
 export const addCardToDeck = (card) => {
