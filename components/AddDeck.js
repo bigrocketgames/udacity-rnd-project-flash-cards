@@ -16,7 +16,7 @@ class AddDeck extends Component {
 
   handleSubmit = (deckTitle) => {
     const newDeck = { title: deckTitle, questions: []}
-    saveDeckTitle(newDeck)
+    saveDeckTitle(deckTitle, newDeck)
   }
 
   render() {
