@@ -6,7 +6,7 @@ const DeckHomeCard = ({deck}) => {
     <View style={styles.deckContainer}>
       <View style={{alignItems: 'center', margin: 10, padding: 20}}>
         <Text style={{fontSize: 30}}>{deck.title}</Text>
-        <Text style={{fontSize: 18}}>{deck.questions.length} questions</Text>
+        <Text style={{fontSize: 18}}>{deck.questions.length > 0 ? deck.questions.length : 0} questions</Text>
       </View>
     </View>
   )
