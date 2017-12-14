@@ -18,8 +18,6 @@ class Decks extends Component {
           this.setState(() => ({
             decks: newArr
           }))
-        } else {
-          console.log("decks are undefined")
         }
       })
   }
