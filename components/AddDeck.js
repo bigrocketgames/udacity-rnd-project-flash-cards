@@ -17,7 +17,13 @@ class AddDeck extends Component {
   handleSubmit = (deckTitle) => {
     const newDeck = { title: deckTitle, questions: []}
     saveDeckTitle(deckTitle, newDeck)
-    this.setState(()=> ({deckTitle: ''}))
+      .then((decks) => {
+        this.setState(()=> ({deckTitle: ''}))
+        this.props.navigation.navigate(
+          'Home',
+          { decks: decks }
+        )
+      })
   }
 
   render() {
