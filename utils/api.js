@@ -4,7 +4,7 @@ const DECKS_STORAGE_KEY = 'decks_storage:key'
 
 export async function getDecks() {
   try{
-   return await AsyncStorage.getItem(DECKS_STORAGE_KEY)
+    return await AsyncStorage.getItem(DECKS_STORAGE_KEY)
       .then((results) => JSON.parse(results))
   } catch (error) {
     console.log(error)
