@@ -36,7 +36,9 @@ export async function saveDeckTitle(key, newDeck){
   // decks.length > 0 ? add newDeck to db : setItem newDeck as only object in decks array 
   if (decks !== null) {
     try {
-      return await AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({[key]: newDeck}))
+      await AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({[key]: newDeck}))
+
+      return getDecks()
     } catch (error) {
       console.log(error)
     }
