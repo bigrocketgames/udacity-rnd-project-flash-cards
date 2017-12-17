@@ -1,22 +1,42 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { connect } from 'react-redux'
 
 class DeckDetail extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.state.params.deckId
+    }
+  }
+
   render () {
-    console.log(this.props)
+    const { deck } = this.props
+
     return (
       <View>
-        <Text>
-        This will be the deck detail where you can view each card to study.
-
-        It should have next and previous buttons to switch between cards.
-          
-        Click a button to take the quiz.
-        
-        Add a button to link to adding a question.</Text>
+        <Text>{deck.title}</Text>
+        <Text>{deck.questions.length > 0 ? deck.questions.length : 0} questions </Text>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate(
+              'AddQuestion',
+              { deckId: deck.title }
+            )}>
+        <Text>Add A Card</Text>
+        </TouchableOpacity>
+        {deck.questions.length > 0 ? <TouchableOpacity onPress={() => this.props.navigation.navigate(
+              'DeckQuiz',
+              { deckId: deck.title }
+            )}><Text>Start Quiz</Text></TouchableOpacity> : null}
       </View>
     )
   }
 }
 
-export default DeckDetail
+const mapStateToProps = (state, {navigation}) => {
+  const { deckId } = navigation.state.params
+  
+  return {
+    deck: state.filter((decks) => decks.title === deckId)[0]
+  }
+}
+
+export default connect(mapStateToProps)(DeckDetail)
