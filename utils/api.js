@@ -1,5 +1,7 @@
 import { AsyncStorage } from 'react-native'
 
+import { objectToArray } from './helpers'
+
 const DECKS_STORAGE_KEY = 'decks_storage:key'
 
 export async function getDecks() {
@@ -12,10 +14,13 @@ export async function getDecks() {
   
 }
 
-export const getDeck = ({deckId}) => {
+export async function getDeck(deckId) {
   try {
-    return deck = AsyncStorage.getItem(DECKS_STORAGE_KEY)
-      // using .then to get the requested deckId
+    return await AsyncStorage.getItem(DECKS_STORAGE_KEY)
+      .then((results) => {
+        decks = JSON.parse(results)
+        decks[deckId]
+      })
   } catch (error) {
     console.log(error)
   }
@@ -36,9 +41,7 @@ export async function saveDeckTitle(key, newDeck){
   // decks.length > 0 ? add newDeck to db : setItem newDeck as only object in decks array 
   if (decks !== null) {
     try {
-      await AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({[key]: newDeck}))
-
-      return getDecks()
+      return await AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({[key]: newDeck}))
     } catch (error) {
       console.log(error)
     }
