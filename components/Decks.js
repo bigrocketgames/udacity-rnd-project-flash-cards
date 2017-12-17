@@ -1,29 +1,26 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
+import { connect } from 'react-redux'
 
 import DeckHomeCard from './DeckHomeCard'
 import { objectToArray } from '../utils/helpers'
 import { getDecks } from '../utils/api'
+import { getDecksSuccess } from '../actions'
 
 class Decks extends Component {
-  state = {
-    decks: []
-  }
 
   componentDidMount() {
+    const { dispatch } = this.props
     getDecks()
       .then((decks) => {
         if (decks !== null) {
-          const newArr = objectToArray(decks)
-          this.setState(() => ({
-            decks: newArr
-          }))
+          dispatch(getDecksSuccess(objectToArray(decks)))
         }
       })
   }
 
   render() {
-    const { decks } = this.state
+    const { decks } = this.props
 
     return (
       <View>
@@ -34,7 +31,7 @@ class Decks extends Component {
             data={decks}
             renderItem={(deck) => <TouchableOpacity onPress={() => this.props.navigation.navigate(
               'DeckDetail',
-              { deck: deck }
+              { deckId: deck.item.title }
             )}>
               <DeckHomeCard deck={deck.item} />
             </TouchableOpacity>}
@@ -47,11 +44,17 @@ class Decks extends Component {
   }
 }
 
+const mapStateToProps = (decks) => {
+  return {
+    decks
+  }
+}
+
 const styles = StyleSheet.create({
   list: {
     padding: 15,
-    padding: 15
+    marginBottom: 65,
   }
 })
 
-export default Decks
+export default connect(mapStateToProps)(Decks)
