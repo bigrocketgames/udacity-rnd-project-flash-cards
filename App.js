@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, StatusBar, Platform } from 'react-native';
 import { TabNavigator, StackNavigator} from 'react-navigation'
 import { Constants } from 'expo'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
 import Decks from './components/Decks'
 import DeckDetail from './components/DeckDetail'
@@ -10,6 +12,7 @@ import AddDeck from './components/AddDeck'
 import DeckQuiz from './components/DeckQuiz'
 import AddQuestion from './components/AddQuestion'
 import { red } from './utils/colors'
+import reducer from './reducers'
 
 function FlashStatusBar ({backgroundColor, ...props}) {
   return (
@@ -84,10 +87,12 @@ const MainNavigator = StackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <View style={{flex: 1}}>
-        {<FlashStatusBar backgroundColor={red} barStyle='light-content' />}
-        <MainNavigator />
-      </View>
+      <Provider store={createStore(reducer)} >
+        <View style={{flex: 1}}>
+          {<FlashStatusBar backgroundColor={red} barStyle='light-content' />}
+          <MainNavigator />
+        </View>
+      </Provider>
     );
   }
 }
