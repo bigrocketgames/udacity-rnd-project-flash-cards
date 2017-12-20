@@ -21,7 +21,7 @@ class DeckDetail extends Component {
           <Text style={styles.deckCardCount}>{deck.questions.length > 0 ? deck.questions.length : 0} questions </Text>
           <TouchableOpacity style={styles.submitbtn} onPress={() => this.props.navigation.navigate(
                 'AddQuestion',
-                { deckId: deck.title }
+                { deck: deck }
               )}>
           <Text>Add A Card</Text>
           </TouchableOpacity>

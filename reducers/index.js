@@ -1,4 +1,4 @@
-import { GET_DECKS_SUCCESS, ADD_DECK_SUCCESS } from '../actions'
+import { GET_DECKS_SUCCESS, ADD_DECK_SUCCESS, ADD_QUESTION_SUCCESS } from '../actions'
 
 export default decks = (state = [], action) => {
   switch (action.type) {
@@ -6,10 +6,21 @@ export default decks = (state = [], action) => {
       return action.decks;
 
     case ADD_DECK_SUCCESS:
-      debugger
       return [
         ...state,
         action.deck
+      ]
+
+    case ADD_QUESTION_SUCCESS:
+      
+      const index = state.findIndex(deck => deck.title === action.deckId)
+      const deck = state.find(deck => deck.title === action.deckId)
+      const updatedDeck = {...deck, questions: [...deck.questions, action.newQuestion]}
+
+      return [
+        ...state.slice(0, index),
+        updatedDeck,
+        ...state.slice(index + 1)
       ]
 
     default:
