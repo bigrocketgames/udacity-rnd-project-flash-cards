@@ -76,7 +76,7 @@ const MainNavigator = StackNavigator({
   AddQuestion: {
     screen: AddQuestion,
     navigationOptions: {
-      haederTintColor: '#fff',
+      headerTintColor: '#fff',
       headerStyle: {
         backgroundColor: red
       }
