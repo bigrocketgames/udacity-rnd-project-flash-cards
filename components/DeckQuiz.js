@@ -1,23 +1,47 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 
 class DeckQuiz extends Component {
+  state = {
+    questionNumber: 1,
+    correct: 0,
+    showAnswer: false
+  }
+
+  handleCorrect = () => {
+    console.log(this.state)
+  }
+
+  handleIncorrect = () => {
+    console.log(this.state)
+  }
+
   render() {
-    return(
-      <View>
-        <Text>
-          Have quiz questions show in order as passed to state.
+    const { questionNumber, correct, showAnswer } = this.state
+    const { deck } = this.props.navigation.state.params
 
-          Multiple choice, true/false, or fill in the blank?
-
-          button for submitting answer.
-
-          Keep track of score and display it at the top-right of the screen.
-
-          After final question, show a results screen.
-        </Text>
-      </View>
-    )
+    if (showAnswer) {
+      return(
+        <View>
+          <Text>
+            {deck.questions[questionNumber - 1].answer}
+          </Text>
+          <TouchableOpacity onPress={() => this.handleCorrect()}><Text>CORRECT</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => this.handleIncorrect()}><Text>INCORRECT</Text></TouchableOpacity>
+        </View>
+      )
+    } else {
+      return(
+        <View>
+          <Text>
+            {deck.questions[questionNumber - 1].question}
+          </Text>
+          <TouchableOpacity onPress={() => this.handleCorrect()}><Text>CORRECT</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => this.handleIncorrect()}><Text>INCORRECT</Text></TouchableOpacity>
+        </View>
+      )
+    }
+    
   }
 }
 
