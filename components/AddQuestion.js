@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import { red } from '../utils/colors'
 import { addQuestionSuccess } from '../actions'
+import { addCardToDeck } from '../utils/api'
 
 class AddQuestion extends Component {
   state = {
@@ -37,7 +38,15 @@ class AddQuestion extends Component {
     dispatch(addQuestionSuccess(deck.title, newQuestion))
 
     // update db
-      // update object and then pass to db to merge with current db
+    const updatedQuestions = {questions: [...deck.questions, newQuestion]}
+    addCardToDeck(deck.title, updatedQuestions)
+    .then(() => {
+      this.setState(()=> ({question: '', answer: ''}))
+      this.props.navigation.navigate(
+        'Home'
+      )
+    })
+
 
   }
 
