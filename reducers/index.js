@@ -12,7 +12,6 @@ export default decks = (state = [], action) => {
       ]
 
     case ADD_QUESTION_SUCCESS:
-      
       const index = state.findIndex(deck => deck.title === action.deckId)
       const deck = state.find(deck => deck.title === action.deckId)
       const updatedDeck = {...deck, questions: [...deck.questions, action.newQuestion]}

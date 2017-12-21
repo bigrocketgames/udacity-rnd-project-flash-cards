@@ -14,18 +14,19 @@ export async function getDecks() {
   
 }
 
-export async function getDeck(deckId) {
-  try {
-    return await AsyncStorage.getItem(DECKS_STORAGE_KEY)
-      .then((results) => {
-        decks = JSON.parse(results)
-        decks[deckId]
-      })
-  } catch (error) {
-    console.log(error)
-  }
+// export async function getDeck(deckId) {
+//   try {
+//     return await AsyncStorage.getItem(DECKS_STORAGE_KEY)
+//       .then((results) => {
+//         decks = JSON.parse(results)
+//         decks[deckId]
+//       })
+//   } catch (error) {
+//     console.log(error)
+//   }
   
-}
+// }
+
 export async function saveDeckTitle(key, newDeck){
   let decks = ''
   
@@ -57,6 +58,7 @@ export async function saveDeckTitle(key, newDeck){
 
 export async function addCardToDeck(key, updatedQuestions) {
   try {
+    // merge the updated questions into the existing db
     return await AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({[key]: updatedQuestions}))
   } catch (error) {
     console.log(error)
