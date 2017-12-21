@@ -27,7 +27,7 @@ class DeckDetail extends Component {
           </TouchableOpacity>
           {deck.questions.length > 0 ? <TouchableOpacity style={styles.submitbtn} onPress={() => this.props.navigation.navigate(
                 'DeckQuiz',
-                { deckId: deck.title }
+                { deck: deck }
               )}><Text>Start Quiz</Text></TouchableOpacity> : null}
         </View>
       </View>
