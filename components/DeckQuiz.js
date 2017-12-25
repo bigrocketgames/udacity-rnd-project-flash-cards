@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Animated, TouchableOpacity } from 'react-native'
 
+import { setLocalNotification, clearLocalNotification } from '../utils/helpers'
+
 class DeckQuiz extends Component {
   state = {
     questionNumber: 1,
@@ -29,6 +31,10 @@ class DeckQuiz extends Component {
         showingAnswer: false
       }))
     } else {
+      // Clear local notification
+      clearLocalNotification()
+        .then(setLocalNotification)
+
       const correct = this.state.correct + 1
 
       this.setState(() => ({
@@ -51,6 +57,9 @@ class DeckQuiz extends Component {
         showingAnswer: false
       }))
     } else {
+      // Clear local notification
+      clearLocalNotification()
+        .then(setLocalNotification)
 
       this.setState(() => ({
         showResults: true

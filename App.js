@@ -13,6 +13,7 @@ import DeckQuiz from './components/DeckQuiz'
 import AddQuestion from './components/AddQuestion'
 import { red } from './utils/colors'
 import reducer from './reducers'
+import { setLocalNotification } from './utils/helpers'
 
 function FlashStatusBar ({backgroundColor, ...props}) {
   return (
@@ -85,6 +86,11 @@ const MainNavigator = StackNavigator({
 })
 
 export default class App extends React.Component {
+
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     return (
       <Provider store={createStore(reducer)} >
