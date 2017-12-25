@@ -53,7 +53,6 @@ class AddQuestion extends Component {
   render() {
     const { question, answer } = this.state
     const { deck } = this.props.navigation.state.params
-    console.log(deck)
 
     return (
       <KeyboardAvoidingView style={styles.container}>
