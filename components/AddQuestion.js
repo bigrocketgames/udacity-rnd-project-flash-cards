@@ -9,16 +9,19 @@ import { addCardToDeck } from '../utils/api'
 class AddQuestion extends Component {
   state = {
     question: '',
-    answer: ''
+    answer: '',
+    error: ''
   }
 
   changeQuestionText = (question) => {
+    question = question.trim()
     this.setState(() => ({
       question
     }))
   }
 
   changeAnswerText = (answer) => {
+    answer = answer.trim()
     this.setState(() => ({
       answer
     }))
@@ -26,6 +29,18 @@ class AddQuestion extends Component {
 
   handleSubmit = (deck, question, answer) => {
     const { dispatch } = this.props
+
+    // Verify that neither the question or answer is blank before submitting
+    if (question === '' || answer === '') {
+      this.setState(() => ({
+        error: "You must fill in both the question and answer boxes to create a new question."
+      }))
+      return
+    } else {
+      this.setState(() => ({
+        error: ''
+      }))
+    }
 
     // Verify that the question ends with at least 1 question mark.  If not, add it.
     if (question[question.length - 1] !== '?') {
@@ -42,23 +57,28 @@ class AddQuestion extends Component {
     addCardToDeck(deck.title, updatedQuestions)
     .then(() => {
       this.setState(()=> ({question: '', answer: ''}))
-      this.props.navigation.navigate(
-        'Home'
-      )
+      this.props.navigation.goBack()
     })
 
 
   }
 
   render() {
-    const { question, answer } = this.state
+    const { question, answer, error } = this.state
     const { deck } = this.props.navigation.state.params
+    let errorText = null
+    console.log(error)
+    
+    if (error.length > 0) {
+      errorText = <Text style={styles.errorText}>{error}</Text>
+    }
 
     return (
       <KeyboardAvoidingView style={styles.container}>
         <Text style={styles.title} >
           Add a new question and answer to the {deck.title} deck.
         </Text>
+        {errorText}
         <Text>Enter the question:</Text>
         <TextInput multiline={true} autoGrow={true} onChangeText={this.changeQuestionText} value={question} style={styles.inputBox}></TextInput>
         <Text>Enter the answer:</Text>
@@ -100,6 +120,10 @@ const styles = StyleSheet.create({
     marginLeft: 40,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 15
   }
 })
 
