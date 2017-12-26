@@ -8,10 +8,13 @@ import { red } from '../utils/colors'
 
 class AddDeck extends Component {
   state = {
-    deckTitle: ''
+    deckTitle: '',
+    error: ''
   }
 
   handleChange = (deckTitle) => {
+    deckTitle = deckTitle.trim()
+
     this.setState(() => ({
       deckTitle
     }))
@@ -21,6 +24,19 @@ class AddDeck extends Component {
     const { dispatch } = this.props
     const newDeck = { title: deckTitle, questions: []}
 
+    if (deckTitle === '') {
+      this.setState(() => ({
+        error: "A new title is required to create a new deck."
+      }))
+      return
+    } else {
+      if (this.state.error !== '') {
+        this.setState(() => ({
+          error: ''
+        }))
+      }
+    }
+
     // update redux
     dispatch(addDeckSuccess(newDeck))
 
@@ -29,17 +45,24 @@ class AddDeck extends Component {
       .then(() => {
         this.setState(()=> ({deckTitle: ''}))
         this.props.navigation.navigate(
-          'Home'
+          'DeckDetail',
+          { deckId: deckTitle }
         )
       })
   }
 
   render() {
-    const { deckTitle } = this.state
+    const { deckTitle, error } = this.state
+    let errorText = null
+
+    if (error.length > 0) {
+      errorText = <Text style={styles.errorText}>{error}</Text>
+    }
 
     return (
       <KeyboardAvoidingView behavior='padding' style={styles.container}>
         <Text style={styles.title}>Create A New Deck</Text>
+        {errorText}
         <View>
           <Text style={{alignSelf: 'center'}}>Input A New Deck Name:</Text>
           <TextInput style={styles.inputBox} value={deckTitle} onChangeText={this.handleChange} />
@@ -82,6 +105,10 @@ const styles = StyleSheet.create({
     marginLeft: 40,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 15
   }
 })
 
