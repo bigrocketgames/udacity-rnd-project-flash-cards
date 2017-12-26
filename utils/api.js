@@ -49,7 +49,7 @@ export async function saveDeckTitle(key, newDeck){
   } else {
     try {
       return await AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify({[key]: newDeck}))
-        .then((results) => console.log(JSON.parse(results)))
+        .then((results) => JSON.parse(results))
     } catch(error) {
       console.log(error)
     }

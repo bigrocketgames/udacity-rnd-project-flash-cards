@@ -108,7 +108,6 @@ class DeckQuiz extends Component {
   }
 
   restartQuiz = () => {
-    console.log(this.state)
     this.setState(() => ({
       questionNumber: 1,
       correct: 0,

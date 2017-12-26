@@ -66,7 +66,6 @@ class AddQuestion extends Component {
     const { question, answer, error } = this.state
     const { deck } = this.props.navigation.state.params
     let errorText = null
-    console.log(error)
     
     if (error.length > 0) {
       errorText = <Text style={styles.errorText}>{error}</Text>
