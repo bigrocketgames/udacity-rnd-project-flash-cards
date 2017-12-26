@@ -100,6 +100,21 @@ class DeckQuiz extends Component {
 
   }
 
+  restartQuiz = () => {
+    console.log(this.state)
+    this.setState(() => ({
+      questionNumber: 1,
+      correct: 0,
+      totalQuestions: this.props.navigation.state.params.deck.questions.length,
+      questionOpacity: new Animated.Value(1),
+      answerOpacity: new Animated.Value(0),
+      viewRotateY: new Animated.Value(0),
+      textRotateY: new Animated.Value(0),
+      showingAnswer: false,
+      showResults: false
+    }))
+  }
+
   render() {
     const { questionNumber, correct, totalQuestions, showResults, questionOpacity, answerOpacity, showingAnswer } = this.state
     const { deck } = this.props.navigation.state.params
@@ -122,6 +137,14 @@ class DeckQuiz extends Component {
           <Text style={styles.quizResults} >
             You got a score of {Math.round((correct/questionNumber)*100)}%
           </Text>
+          <View style={styles.btnContainer} >
+            <TouchableOpacity style={[ styles.correctBtn]} onPress={() => this.restartQuiz()}>
+              <Text style={styles.btnText}>Restart Quiz</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[ styles.incorrectBtn]} onPress={() => this.props.navigation.goBack()}>
+              <Text style={styles.btnText}>Back to Deck</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       )
     } else {
