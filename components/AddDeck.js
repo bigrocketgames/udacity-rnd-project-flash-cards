@@ -13,17 +13,15 @@ class AddDeck extends Component {
   }
 
   handleChange = (deckTitle) => {
-    deckTitle = deckTitle.trim()
-
     this.setState(() => ({
       deckTitle
     }))
   }
 
   handleSubmit = (deckTitle) => {
-    const { dispatch } = this.props
     const newDeck = { title: deckTitle, questions: []}
-
+    deckTitle = deckTitle.trim()
+    
     if (deckTitle === '') {
       this.setState(() => ({
         error: "A new title is required to create a new deck."
@@ -38,7 +36,7 @@ class AddDeck extends Component {
     }
 
     // update redux
-    dispatch(addDeckSuccess(newDeck))
+    this.props.addDeckSuccess(newDeck)
 
     // update db
     saveDeckTitle(deckTitle, newDeck)
@@ -112,4 +110,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect()(AddDeck)
+export default connect(null, {addDeckSuccess})(AddDeck)

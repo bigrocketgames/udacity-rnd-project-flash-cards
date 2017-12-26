@@ -16,6 +16,13 @@ class DeckQuiz extends Component {
     showResults: false
   }
 
+  componentWillUnmount() {
+    this.state.questionOpacity.removeAllListeners()
+    this.state.answerOpacity.removeAllListeners()
+    this.state.viewRotateY.removeAllListeners()
+    this.state.textRotateY.removeAllListeners()
+  }
+
   handleCorrect = () => {
     if (this.state.questionNumber < this.props.navigation.state.params.deck.questions.length) {
       const questionNumber = this.state.questionNumber + 1

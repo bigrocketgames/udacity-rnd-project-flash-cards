@@ -10,11 +10,10 @@ import { getDecksSuccess } from '../actions'
 class Decks extends Component {
 
   componentDidMount() {
-    const { dispatch } = this.props
     getDecks()
       .then((decks) => {
         if (decks !== null) {
-          dispatch(getDecksSuccess(objectToArray(decks)))
+          this.props.getDecksSuccess(objectToArray(decks))
         }
       })
   }
@@ -44,11 +43,7 @@ class Decks extends Component {
   }
 }
 
-const mapStateToProps = (decks) => {
-  return {
-    decks
-  }
-}
+const mapStateToProps = (decks) => ({ decks })
 
 const styles = StyleSheet.create({
   list: {
@@ -57,4 +52,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(mapStateToProps)(Decks)
+export default connect(mapStateToProps, {getDecksSuccess})(Decks)

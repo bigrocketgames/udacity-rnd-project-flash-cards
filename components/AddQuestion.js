@@ -14,21 +14,20 @@ class AddQuestion extends Component {
   }
 
   changeQuestionText = (question) => {
-    question = question.trim()
     this.setState(() => ({
       question
     }))
   }
 
   changeAnswerText = (answer) => {
-    answer = answer.trim()
     this.setState(() => ({
       answer
     }))
   }
 
   handleSubmit = (deck, question, answer) => {
-    const { dispatch } = this.props
+    question = question.trim()
+    answer = answer.trim()
 
     // Verify that neither the question or answer is blank before submitting
     if (question === '' || answer === '') {
@@ -50,7 +49,7 @@ class AddQuestion extends Component {
     const newQuestion = {question, answer}
 
     // update redux
-    dispatch(addQuestionSuccess(deck.title, newQuestion))
+    this.props.addQuestionSuccess(deck.title, newQuestion)
 
     // update db
     const updatedQuestions = {questions: [...deck.questions, newQuestion]}
@@ -127,4 +126,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect()(AddQuestion)
+export default connect(null, {addQuestionSuccess})(AddQuestion)
