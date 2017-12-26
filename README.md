@@ -6,7 +6,7 @@ This project allows you to create decks of flash cards to help you study the thi
 
 ### You may see this application in action after you fork and clone the repo and follow these steps:
 
-  #### You will need to have either a device or the necessary simulators for either Android or iOS
+  #### You will need to have either a device or the necessary simulator(s) for either Android or iOS
   #### Once you have the appropriate simulator:
     * install all dependencies with 'yarn install'
     * start the application with 'yarn start'
