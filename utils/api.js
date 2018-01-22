@@ -14,19 +14,6 @@ export async function getDecks() {
   
 }
 
-// export async function getDeck(deckId) {
-//   try {
-//     return await AsyncStorage.getItem(DECKS_STORAGE_KEY)
-//       .then((results) => {
-//         decks = JSON.parse(results)
-//         decks[deckId]
-//       })
-//   } catch (error) {
-//     console.log(error)
-//   }
-  
-// }
-
 export async function saveDeckTitle(key, newDeck){
   let decks = ''
   
@@ -60,6 +47,20 @@ export async function addCardToDeck(key, updatedQuestions) {
   try {
     // merge the updated questions into the existing db
     return await AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({[key]: updatedQuestions}))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function deleteDeck(key) {
+  try {
+    return await AsyncStorage.getItem(DECKS_STORAGE_KEY)
+      .then((results) => {
+        const data = JSON.parse(results)
+        data[key] = undefined
+        delete data[key]
+        AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data))
+      })
   } catch (error) {
     console.log(error)
   }

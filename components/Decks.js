@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import DeckHomeCard from './DeckHomeCard'
 import { objectToArray } from '../utils/helpers'
 import { getDecks } from '../utils/api'
-import { getDecksSuccess } from '../actions'
+import { getDecksSuccess, deleteDeckSuccess } from '../actions'
 
 class Decks extends Component {
 
@@ -16,6 +17,21 @@ class Decks extends Component {
           this.props.getDecksSuccess(objectToArray(decks))
         }
       })
+  }
+
+  deleteDeck = (deck) => {
+    console.log("this is the deck passed back to this function", deck)
+    // update redux
+      this.props.deleteDeckSuccess(deck.title)
+
+    // update db
+
+    // const updatedQuestions = {questions: [...deck.questions, newQuestion]}
+    // addCardToDeck(deck.title, updatedQuestions)
+    // .then(() => {
+    //   this.setState(()=> ({question: '', answer: ''}))
+    //   this.props.navigation.goBack()
+    // })
   }
 
   render() {
@@ -32,7 +48,7 @@ class Decks extends Component {
               'DeckDetail',
               { deckId: deck.item.title }
             )}>
-              <DeckHomeCard deck={deck.item} />
+              <DeckHomeCard deck={deck.item} deleteDeck={this.deleteDeck.bind(this)} />
             </TouchableOpacity>}
             keyExtractor={(deck) => deck.title}
           /> 
@@ -45,6 +61,13 @@ class Decks extends Component {
 
 const mapStateToProps = (decks) => ({ decks })
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    getDecksSuccess: getDecksSuccess,
+    deleteDeckSuccess: deleteDeckSuccess
+  }, dispatch);
+}
+
 const styles = StyleSheet.create({
   list: {
     padding: 15,
@@ -52,4 +75,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default connect(mapStateToProps, {getDecksSuccess})(Decks)
+export default connect(mapStateToProps, mapDispatchToProps)(Decks)

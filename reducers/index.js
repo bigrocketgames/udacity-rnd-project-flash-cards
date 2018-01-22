@@ -1,4 +1,4 @@
-import { GET_DECKS_SUCCESS, ADD_DECK_SUCCESS, ADD_QUESTION_SUCCESS } from '../actions'
+import { GET_DECKS_SUCCESS, ADD_DECK_SUCCESS, ADD_QUESTION_SUCCESS, DELETE_DECK_SUCCESS } from '../actions'
 
 export default decks = (state = [], action) => {
   switch (action.type) {
@@ -20,6 +20,14 @@ export default decks = (state = [], action) => {
         ...state.slice(0, index),
         updatedDeck,
         ...state.slice(index + 1)
+      ]
+
+    case DELETE_DECK_SUCCESS:
+      const deckIndex = state.findIndex(deck => deck.title == action.deckId)
+
+      return [
+        ...state.slice(0, deckIndex),
+        ...state.slice(deckIndex + 1)
       ]
 
     default:

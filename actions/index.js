@@ -1,6 +1,7 @@
 export const GET_DECKS_SUCCESS = 'GET_DECKS_SUCCESS'
 export const ADD_DECK_SUCCESS = 'ADD_DECK_SUCCESS'
 export const ADD_QUESTION_SUCCESS = 'ADD_QUESTION_SUCCESS'
+export const DELETE_DECK_SUCCESS = 'DELETE_DECK_SUCCESS'
 
 export const getDecksSuccess = (decks) => {
   return {
@@ -13,6 +14,13 @@ export const addDeckSuccess = (deck) => {
   return {
     type: ADD_DECK_SUCCESS,
     deck
+  }
+}
+
+export const deleteDeckSuccess = (deckId) => {
+  return {
+    type: DELETE_DECK_SUCCESS,
+    deckId
   }
 }
 
