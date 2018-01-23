@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
-import { red } from '../utils/colors'
+import { red, white } from '../utils/colors'
 
 class DeckDetail extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -19,17 +19,38 @@ class DeckDetail extends Component {
         <View style={{alignItems: 'center', margin: 10, padding: 20}}>
           <Text style={styles.deckTitle}>{deck.title}</Text>
           <Text style={styles.deckCardCount}>{deck.questions.length > 0 ? deck.questions.length : 0} questions </Text>
-          <TouchableOpacity style={styles.submitbtn} onPress={() => this.props.navigation.navigate(
-                'AddQuestion',
-                { deck: deck }
-              )}>
-          <Text>Add A Card</Text>
-          </TouchableOpacity>
-          {deck.questions.length > 0 ? <TouchableOpacity style={styles.submitbtn} onPress={() => this.props.navigation.navigate(
-                'DeckQuiz',
-                { deck: deck }
-              )}><Text>Start Quiz</Text></TouchableOpacity> : null}
         </View>
+            {deck.questions.length > 0 ? 
+              <View style={styles.btnContainer}>
+                <TouchableOpacity style={styles.submitbtn} onPress={() => this.props.navigation.navigate(
+                  'AddQuestion',
+                  { deck: deck }
+                )}>
+                  <Text style={{color: white}}>Add A Card</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.submitbtn} onPress={() => this.props.navigation.navigate(
+                    'DeckQuiz',
+                    { deck: deck }
+                )}>
+                  <Text style={{color: white}}>Start Quiz</Text>
+                </TouchableOpacity> 
+                <TouchableOpacity style={styles.submitbtn} onPress={() => this.props.navigation.navigate(
+                  'DeckStudy',
+                  { deck: deck }
+                )}>
+                  <Text style={{color: white}}>Study Up</Text>
+                </TouchableOpacity>
+              </View>
+            : 
+              <View style={styles.btnContainer}>
+                <TouchableOpacity style={styles.submitbtn} onPress={() => this.props.navigation.navigate(
+                  'AddQuestion',
+                  { deck: deck }
+                )}>
+                  <Text style={{color: white}}>Add A Card</Text>
+                </TouchableOpacity>
+              </View>
+            }
       </View>
     )
   }
@@ -61,14 +82,19 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 10
   },
+  btnContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    marginBottom: 35
+  },
   submitbtn: {
+    flex: 0.31,
     backgroundColor: red,
     borderRadius: 7,
     padding: 10,
-    height: 45,
-    marginTop: 15,
-    marginRight: 40,
-    marginLeft: 40,
+    height: 40,
+    marginRight: 'auto',
+    marginLeft: 'auto',
     justifyContent: 'center',
     alignItems: 'center'
   }
