@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react-native'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import DeckHomeCard from './DeckHomeCard'
 import { objectToArray } from '../utils/helpers'
-import { getDecks } from '../utils/api'
+import { getDecks, deleteDeck } from '../utils/api'
 import { getDecksSuccess, deleteDeckSuccess } from '../actions'
 
 class Decks extends Component {
@@ -19,19 +19,23 @@ class Decks extends Component {
       })
   }
 
-  deleteDeck = (deck) => {
-    console.log("this is the deck passed back to this function", deck)
+  confirmedDeleteDeck = (deck) => {
     // update redux
-      this.props.deleteDeckSuccess(deck.title)
+    this.props.deleteDeckSuccess(deck.title)
 
     // update db
+      deleteDeck(deck.title)
+  }
 
-    // const updatedQuestions = {questions: [...deck.questions, newQuestion]}
-    // addCardToDeck(deck.title, updatedQuestions)
-    // .then(() => {
-    //   this.setState(()=> ({question: '', answer: ''}))
-    //   this.props.navigation.goBack()
-    // })
+  deleteDeck = (deck) => {
+    Alert.alert(
+      'Confirm Delete Deck',
+      `Do you really want to delete the deck - ${deck.title}?`,
+      [
+        {text: 'Yes', onPress: () => this.confirmedDeleteDeck(deck)},
+        {text: 'No'}
+      ]
+    )
   }
 
   render() {
