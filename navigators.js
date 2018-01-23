@@ -6,6 +6,7 @@ import Decks from './components/Decks'
 import DeckDetail from './components/DeckDetail'
 import AddDeck from './components/AddDeck'
 import DeckQuiz from './components/DeckQuiz'
+import DeckStudy from './components/DeckStudy'
 import AddQuestion from './components/AddQuestion'
 import { red, white, black } from './utils/colors'
 
@@ -53,6 +54,15 @@ export const MainNavigator = StackNavigator({
   },
   DeckQuiz: {
     screen: DeckQuiz,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: red
+      }
+    }
+  },
+  DeckStudy: {
+    screen: DeckStudy,
     navigationOptions: {
       headerTintColor: white,
       headerStyle: {

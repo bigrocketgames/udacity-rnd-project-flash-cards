@@ -52,6 +52,15 @@ export async function addCardToDeck(key, updatedQuestions) {
   }
 }
 
+export async function deleteQuestionFromDeck(key, updatedQuestions) {
+  try {
+    // merge the updated questions with the db
+    return await AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify({[key]: updatedQuestions}))
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export async function deleteDeck(key) {
   try {
     return await AsyncStorage.getItem(DECKS_STORAGE_KEY)
