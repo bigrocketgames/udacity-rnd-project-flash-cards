@@ -57,7 +57,7 @@ class Decks extends Component {
             keyExtractor={(deck) => deck.title}
           /> 
           : 
-          <Text>Please add your first deck of cards to begin.</Text>}
+          <Text style={{ alignSelf: 'center' }}>Please add your first deck of cards to begin.</Text>}
       </View> 
     )
   }
