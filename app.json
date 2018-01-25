@@ -1,5 +1,17 @@
 {
   "expo": {
-    "sdkVersion": "23.0.0"
+    "sdkVersion": "23.0.0",
+    "orientation": "portrait",
+    "name": "Flash Cards",
+    "description": "Make your own flash cards to help you study.",
+    "slug": "flashcards",
+    "version": "1.0",
+    "icon": "",
+    "notification": {
+      "icon": ""
+    },
+    "ios": {
+      "bundleIdentifier": "com.bigrocketgames.flashcards"
+    }
   }
 }
