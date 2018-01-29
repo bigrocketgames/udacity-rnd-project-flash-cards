@@ -2,7 +2,7 @@
   "expo": {
     "sdkVersion": "23.0.0",
     "orientation": "portrait",
-    "name": "Flash Cards",
+    "name": "Flash Cards By You",
     "description": "Make your own flash cards to help you study.",
     "slug": "flashcards",
     "version": "1.0",
