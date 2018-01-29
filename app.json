@@ -6,9 +6,9 @@
     "description": "Make your own flash cards to help you study.",
     "slug": "flashcards",
     "version": "1.0",
-    "icon": "",
+    "icon": "icon.png",
     "notification": {
-      "icon": ""
+      "icon": "icon.png"
     },
     "ios": {
       "bundleIdentifier": "com.bigrocketgames.flashcards"
