@@ -12,6 +12,9 @@
     },
     "ios": {
       "bundleIdentifier": "com.bigrocketgames.flashcards"
+    },
+    "android": {
+      "package": "com.bigrocketgames.flashcards"
     }
   }
 }
