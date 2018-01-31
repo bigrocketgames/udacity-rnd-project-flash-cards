@@ -14,7 +14,8 @@
       "bundleIdentifier": "com.bigrocketgames.flashcards"
     },
     "android": {
-      "package": "com.bigrocketgames.flashcards"
+      "package": "com.bigrocketgames.flashcards",
+      "permissions": ["WRITE_EXTERNAL_STORAGE"]
     }
   }
 }
