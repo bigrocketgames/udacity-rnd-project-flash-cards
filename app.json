@@ -5,7 +5,7 @@
     "name": "Flash Cards By You",
     "description": "Make your own flash cards to help you study.",
     "slug": "flashcards",
-    "version": "1.0",
+    "version": "1.0.1",
     "icon": "icon.png",
     "notification": {
       "icon": "icon.png"
