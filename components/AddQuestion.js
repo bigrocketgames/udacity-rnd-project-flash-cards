@@ -82,7 +82,7 @@ class AddQuestion extends Component {
         <Text>Enter the answer:</Text>
         <TextInput multiline={true} autoGrow={true} onChangeText={this.changeAnswerText} value={answer} style={styles.inputBox}></TextInput>
         <TouchableHighlight style={styles.submitbtn} onPress={() => this.handleSubmit(deck, question, answer)}>
-          <Text style={{color: '#fff'}}>Submit</Text>
+          <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 18}}>Submit</Text>
         </TouchableHighlight>
       </KeyboardAvoidingView>
     )

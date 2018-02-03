@@ -66,7 +66,7 @@ class AddDeck extends Component {
           <TextInput style={styles.inputBox} value={deckTitle} onChangeText={this.handleChange} />
         </View>
         <TouchableHighlight style={styles.submitbtn} onPress={() => this.handleSubmit(deckTitle)}>
-          <Text style={{color: '#fff'}}>Submit</Text>
+          <Text style={{color: '#fff', fontSize: 18, fontWeight: 'bold'}}>Submit</Text>
         </TouchableHighlight>
       </KeyboardAvoidingView>
     )
