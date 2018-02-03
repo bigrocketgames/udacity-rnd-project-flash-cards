@@ -15,7 +15,7 @@
     },
     "android": {
       "package": "com.bigrocketgames.flashcards",
-      "versionCode": 2,
+      "versionCode": 3,
       "permissions": ["WRITE_EXTERNAL_STORAGE"]
     }
   }
