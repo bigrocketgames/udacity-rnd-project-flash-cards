@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, Animated, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Animated, TouchableOpacity, Platform } from 'react-native'
 import { connect } from 'react-redux'
 
 import { deleteQuestionSuccess } from '../actions/index'
@@ -187,11 +187,13 @@ class DeckStudy extends Component {
                 </Animated.View>
               </Animated.View>
               
-              <TouchableOpacity onPress={() => this.onShowQuestion()}>
-                <Text style={styles.showQA}>
-                  Show the question
-                </Text>
-              </TouchableOpacity> 
+              <View style={styles.showQABtnContainer}>
+                <TouchableOpacity style={styles.showQABtn} onPress={() => this.onShowQuestion()}>
+                  <Text style={styles.showQA}>
+                    Show the question
+                  </Text>
+                </TouchableOpacity> 
+              </View>
             </View>
           :
           <View>
@@ -206,11 +208,13 @@ class DeckStudy extends Component {
               </Animated.View>
             </Animated.View>
             
-            <TouchableOpacity onPress={() => this.onShowAnswer()}>
-              <Text style={styles.showQA}>
-                Show the answer
-              </Text>
-            </TouchableOpacity> 
+            <View style={styles.showQABtnContainer}>
+              <TouchableOpacity style={styles.showQABtn} onPress={() => this.onShowAnswer()}>
+                <Text style={styles.showQA}>
+                  Show the answer
+                </Text>
+              </TouchableOpacity> 
+            </View>
           </View>
           }
 
@@ -219,7 +223,7 @@ class DeckStudy extends Component {
               <Text style={styles.btnText}>Previous Question</Text>
             </TouchableOpacity> }
             <TouchableOpacity style={[ styles.nextBtn]} onPress={() => this.nextQuestion()}>
-              <Text style={styles.btnText}>{ questionNumber < totalQuestions ? 'Next Question' : 'Show Results' }</Text>
+              <Text style={styles.btnText}>{ questionNumber < totalQuestions ? 'Next Question' : 'Finish Study Session' }</Text>
             </TouchableOpacity>
           </View>
 
@@ -243,13 +247,23 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     justifyContent: 'center',
     borderRadius: 10,
-    shadowRadius: 3,
-    shadowOpacity: 0.8,
-    shadowColor: 'rgba(0,0,255,0.5)',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    }
+    ...Platform.select({
+      ios: {
+        shadowRadius: 3,
+        shadowOpacity: 0.8,
+        shadowColor: 'rgba(0,0,255,0.5)',
+        shadowOffset: {
+          width: 0,
+          height: 3
+        }
+      },
+      android: {
+        borderWidth: 5,
+        borderStyle: 'solid',
+        borderColor: 'rgba(0, 0, 255, 0.2)',
+
+      },
+    })
   },
   quizHeader: {
     alignSelf: 'center',
@@ -275,14 +289,27 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     fontSize: 25
   },
+  showQABtnContainer: {
+    flex: 1,
+    marginTop: 30,
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+  showQABtn: {
+    flex: 0.35,
+    borderRadius: 10,
+    alignSelf: 'center',
+    backgroundColor: 'black'
+  },
   showQA: {
     alignSelf: 'center',
+    color: 'white',
     margin: 10,
     fontSize: 20
   },
   btnContainer: {
     flex: 1,
-    marginTop: 10,
+    marginTop: 70,
     flexDirection: 'row',
   },
   nextBtn: {

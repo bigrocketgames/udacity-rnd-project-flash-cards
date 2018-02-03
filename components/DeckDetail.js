@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native'
 import { connect } from 'react-redux'
 
 import { red, white } from '../utils/colors'
@@ -64,13 +64,24 @@ const styles = StyleSheet.create({
     marginTop: 10,
     justifyContent: 'center',
     borderRadius: 10,
-    shadowRadius: 3,
-    shadowOpacity: 0.8,
-    shadowColor: 'rgba(0,0,255,0.5)',
-    shadowOffset: {
-      width: 0,
-      height: 3
-    }
+    ...Platform.select({
+      ios: {
+        shadowRadius: 3,
+        shadowOpacity: 0.8,
+        shadowColor: 'rgba(0,0,255,0.5)',
+        shadowOffset: {
+          width: 0,
+          height: 3
+        }
+      },
+      android: {
+        // elevation: 5,
+        borderWidth: 5,
+        borderStyle: 'solid',
+        borderColor: 'rgba(0, 0, 255, 0.2)',
+
+      },
+    })
   },
   deckTitle: {
     flexDirection: 'row',
