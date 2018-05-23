@@ -1,8 +1,8 @@
-# Flash-Cards Project
+# Flash-Cards By You
 
-This is my project for the React-Native section of the Udacity React Nanodegree Program.
+React-Native flash cards application.
 
-This project allows you to create decks of flash cards to help you study the things you want to learn.
+This project allows you to create decks of flash cards to help you study the things you want to learn, or need to stay up to date on.
 
 ### You may see this application in action after you fork and clone the repo and follow these steps:
 
@@ -15,5 +15,4 @@ This project allows you to create decks of flash cards to help you study the thi
 ## Create React Native App
 
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
-
-Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
+The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
